@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sequence:</b>
+  <%= @task.sequence %>
+</p>
+
+<p>
+  <b>A:</b>
+  <%= @task.a %>
+</p>
+
+<p>
+  <b>T:</b>
+  <%= @task.t %>
+</p>
+
+<p>
+  <b>C:</b>
+  <%= @task.c %>
+</p>
+
+<p>
+  <b>G:</b>
+  <%= @task.g %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @task.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
