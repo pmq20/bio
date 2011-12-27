@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111227134432) do
+ActiveRecord::Schema.define(:version => 20111227143624) do
 
   create_table "tasks", :force => true do |t|
     t.text     "sequence"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20111227134432) do
     t.datetime "updated_at"
     t.string   "title"
     t.text     "memo"
+    t.text     "point_sequence"
+    t.text     "point_sequence_normalized"
   end
 
 end

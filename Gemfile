@@ -34,3 +34,10 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
+
+group :development do
+  gem 'pry'
+end
+
+# gem 'thin'
+gem 'unicorn'  

@@ -1,8 +1,50 @@
+<style type="text/css" media="screen">
+textarea {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+ width: 99%;
+ height:500px;
+ overflow:auto;
+}
+span.a,span.t,span.c,span.g{
+  width:16px;
+  height:16px;
+  display:block;
+  float:left;
+
+}
+span.a{
+  color:red;
+}
+span.t{
+  color:blue;
+}
+span.c{
+  color:green;
+}
+span.g{
+  color:black;
+}
+</style>
 <p id="notice"><%= notice %></p>
+<p>
+  <b>Title:</b>
+  <%= @task.title %>
+</p>
+
 
 <p>
   <b>Sequence:</b>
-  <%= @task.sequence %>
+
+  <div>
+  <% @task.sequence.each_char do |char| %>
+  <span class="<%= char.downcase %>"><%= char %></span>
+  <% end %>
+  <br style="clear:both">
+  </div>
 </p>
 
 <p>
@@ -24,10 +66,13 @@
   <b>G:</b>
   <%= @task.g %>
 </p>
-
+<hr>
 <p>
-  <b>User:</b>
-  <%= @task.user_id %>
+  <b>Point Sequence:</b>
+  <textarea readonly="readonly"><%= @task.point_sequence %></textarea>
+  <b>Point Sequence (Normalized):</b>
+  <textarea readonly="readonly"><%= @task.point_sequence_normalized %></textarea>
+  
 </p>
 
 
