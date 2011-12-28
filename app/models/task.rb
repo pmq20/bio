@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :c
   validates_presence_of :g
   after_validation :point_sequences
+
   def point_sequences
     self.sequence.gsub!(/[^atcgATCG]/,'')
     self.sequence.gsub!('a','A')

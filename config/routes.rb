@@ -1,5 +1,10 @@
 Bio::Application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    member do
+      put 'revert'
+      put 'duplicate'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

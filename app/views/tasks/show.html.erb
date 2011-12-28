@@ -37,10 +37,12 @@ span.g{
 
 
 <p>
-  <b>Sequence:</b>
-
+  <b>Sequence(<%= @task.sequence.length %>):</b>
+  <textarea readonly="readonly"><%= @task.sequence %></textarea>
   <div>
+    
   <% @task.sequence.each_char do |char| %>
+  <% break; %>
   <span class="<%= char.downcase %>"><%= char %></span>
   <% end %>
   <br style="clear:both">
@@ -74,7 +76,49 @@ span.g{
   <textarea readonly="readonly"><%= @task.point_sequence_normalized %></textarea>
   
 </p>
+<p>
+  <b>Statistics:</b>
+  <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <th></th>
+    <% arr = ['A','T','C','G']%>
+    <% val = Array.new%>
 
+    <% val[0]='' %>
+    <% val[1]='' %>
+    <% val[2]='' %>
+    <% @task.point_sequence.split("\n").each do |line| %>
+      <% lines = line.split(' ') %>
+      <% val[0]+=lines[0]+' ' %>
+      <% val[1]+=lines[1]+' ' %>
+      <% val[2]+=lines[2]+' ' %>
+    <% end %>
+
+    <% arr.each do |first| %>
+      <% arr.each do |second| %>
+        <% arr.each do |third| %>
+          <th><%= now = "#{first}#{second}#{third}" %></th>
+        <% end %>
+      <% end %>
+    <% end %>
+    </tr>
+    <% 0.upto(2) do |i| %>
+    <tr>
+      <th>Seq <%= i %></th>
+      <% arr.each do |first| %>
+        <% arr.each do |second| %>
+          <% arr.each do |third| %>
+            <% now = "#{first}#{second}#{third}" %>
+            <% now.gsub!('A',@task.a.to_s);now.gsub!('T',@task.t.to_s);now.gsub!('C',@task.c.to_s);now.gsub!('G',@task.g.to_s) %>
+            <td><%= val[i].scan(now).count %></td>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+  <textarea readonly="readonly"><%= @task.point_sequence %></textarea>  
+</p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

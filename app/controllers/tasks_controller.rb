@@ -1,4 +1,41 @@
 class TasksController < ApplicationController
+  def duplicate
+    @task = Task.find(params[:id]).dup
+    @task.title += "(#{Time.now})"
+    respond_to do |format|
+      if @task.save
+        format.html {
+          # render 'calc',:stream=>true
+          redirect_to tasks_path, notice: 'Task was successfully reverted and created.'
+        }
+        format.json { render json: @task, status: :created, location: @task }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+    
+  end
+  
+  def revert
+    @task = Task.find(params[:id]).dup
+    @task.title += "(Reverted)"
+    @task.sequence = @task.sequence.reverse
+    respond_to do |format|
+      if @task.save
+        format.html {
+          # render 'calc',:stream=>true
+          redirect_to tasks_path, notice: 'Task was successfully reverted and created.'
+        }
+        format.json { render json: @task, status: :created, location: @task }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   # GET /tasks
   # GET /tasks.json
   def index
